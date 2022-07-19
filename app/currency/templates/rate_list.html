@@ -1,8 +1,27 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    {% for rate in rate_list %}
-        <div> ID: {{rate.id}}, Sale: {{rate.sale}}, Buy: {{rate.buy}}</div>
-    {% endfor %}
+    <table>
+      <tr>
+        <th>id</th>
+        <th>base_currency_type</th>
+        <th>currency_type</th>
+        <th>sale</th>
+        <th>buy</th>
+        <th>source</th>
+        <th>created</th>
+      </tr>
+      {% for rate in rate_list %}
+          <tr>
+            <td>{{rate.id}}</td>
+            <td>{{rate.base_currency_type}}</td>
+            <td>{{rate.currency_type}}</td>
+            <td>{{rate.sale}}</td>
+            <td>{{rate.buy}}</td>
+            <th>{{rate.source}}</th>
+            <th>{{rate.created}}</th>
+          </tr>
+      {% endfor %}
+    </table>
 
 {% endblock main_content %}
