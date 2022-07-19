@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.urls import path
-from currency.views import first_func, contact_base
+from currency.views import first_func, contact_base, rate_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('first_func/', first_func),
 
-    path('contact_base/', contact_base)
+    path('contact_base/', contact_base),
+
+    path('rate/', rate_list),
 ]
