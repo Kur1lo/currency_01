@@ -3,23 +3,23 @@
 {% block main_content %}
     <table>
       <tr>
-        <th>id</th>
-        <th>base_currency_type</th>
-        <th>currency_type</th>
-        <th>sale</th>
-        <th>buy</th>
-        <th>source</th>
-        <th>created</th>
+        <th>Id</th>
+        <th>Base_currency_type</th>
+        <th>Currency_type</th>
+        <th>Sale</th>
+        <th>Buy</th>
+        <th>Source</th>
+        <th>Created</th>
       </tr>
       {% for rate in rate_list %}
           <tr>
-            <td>{{rate.id}}</td>
+            <th>{{rate.id}}</th>
             <td>{{rate.base_currency_type}}</td>
             <td>{{rate.currency_type}}</td>
             <td>{{rate.sale}}</td>
             <td>{{rate.buy}}</td>
-            <th>{{rate.source}}</th>
-            <th>{{rate.created}}</th>
+            <td>{{rate.source}}</td>
+            <td>{{rate.created}}</td>
           </tr>
       {% endfor %}
     </table>
