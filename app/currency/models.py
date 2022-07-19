@@ -6,5 +6,3 @@ class ContactUs(models.Model):
     email_from = models.EmailField(max_length=254)
     subject = models.CharField(max_length=200)
     massage = models.CharField(max_length=500)
-
-
