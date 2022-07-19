@@ -1,4 +1,6 @@
 from django.http import HttpResponse
+from django.shortcuts import render
+
 from currency.models import ContactUs, Rate
 
 
@@ -6,17 +8,19 @@ def first_func(request):
     return HttpResponse("Hello world")
 
 
+def index(request):
+    return render(request, 'index.html')
+
+
 def contact_base(request):
-    base_list = []
-    for data in ContactUs.objects.all():
-        redy_string = f'<br>{data.id}, {data.email_to}, {data.email_from}, {data.subject}, {data.massage} '
-        base_list.append(redy_string)
-    return HttpResponse(str(base_list))
+    context = {
+        'base_list': ContactUs.objects.all(),
+    }
+    return render(request, 'contact_base.html', context=context)
 
 
 def rate_list(request):
-    rates_list = []
-    for rate in Rate.objects.all():
-        html_string = f'ID: {rate.id}, sale: {rate.sale}, buy: {rate.buy} <br>'
-        rates_list.append(html_string)
-    return HttpResponse(str(rates_list))
+    context = {
+        'rate_list': Rate.objects.all(),
+    }
+    return render(request, 'rate_list.html', context=context)
