@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Email_to</th>
+        <th>Email_from</th>
+        <th>Subject</th>
+        <th>Massage</th>
+      </tr>
+      {% for data in base_list %}
+          <tr>
+            <th>{{data.id}}</th>
+            <td>{{data.email_to}}</td>
+            <td>{{data.email_from}}</td>
+            <td>{{data.subject}}</td>
+            <td>{{data.massage}}</td>
+          </tr>
+      {% endfor %}
+    </table>
+
+{% endblock main_content %}
