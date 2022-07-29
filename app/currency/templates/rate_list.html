@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
+  <div><a href="/rate/rate_create">Create new rate</a></div>
+
     <table>
       <tr>
         <th>Id</th>
@@ -20,6 +22,10 @@
             <td>{{rate.buy}}</td>
             <td>{{rate.source}}</td>
             <td>{{rate.created}}</td>
+            <td><a href="#"> view details </a>
+              <a href="!"> edit </a>
+              <a href="__"> delete </a>
+            </td>
           </tr>
       {% endfor %}
     </table>

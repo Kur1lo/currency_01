@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from currency.views import first_func, contact_base, rate_list, index, source_data
+from currency.views import first_func, contact_base, rate_list, index, source_data, rate_create
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -10,6 +10,8 @@ urlpatterns = [
     path('contact_base/', contact_base),
 
     path('rate/', rate_list),
+
+    path('rate/rate_create/', rate_create),
 
     path('source/', source_data),
 

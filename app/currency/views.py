@@ -26,8 +26,13 @@ def rate_list(request):
     return render(request, 'rate_list.html', context=context)
 
 
+def rate_create(request):
+    context = {}
+    return render(request, 'rate_create.html', context=context)
+
+
 def source_data(request):
     context = {
-        'rate_list': Source.objects.all(),
+        'source_list': Source.objects.all(),
     }
     return render(request, 'source_data.html', context=context)

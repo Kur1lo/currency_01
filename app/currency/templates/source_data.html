@@ -7,10 +7,10 @@
         <th>Name</th>
         <th>Source URL</th>
       </tr>
-      {% for rate in rate_list %}
+      {% for source in source_list %}
           <tr>
-            <th>{{rate.id}}</th>
-            <td>{{source.source_url}}</td>
+            <th>{{source.id}}</th>
+            <td>{{source.name}}</td>
             <td>{{source.source_url}}</td>
           </tr>
       {% endfor %}
