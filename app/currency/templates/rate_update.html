@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title%} CREATE {% endblock title%}
+{% block title%} UPDATE {% endblock title%}
 
 {% block main_content%}
 
-    Create
+    Update
 
     <form method="post">
         {%csrf_token%}
         {{form.as_p}}
         <button type="submit">Send</button>
+        <button type="reset">Reset</button>
     </form>
 {% endblock main_content %}
