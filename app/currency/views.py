@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from currency.models import ContactUs, Rate
+from currency.models import ContactUs, Rate, Source
 
 
 def first_func(request):
@@ -24,3 +24,10 @@ def rate_list(request):
         'rate_list': Rate.objects.all(),
     }
     return render(request, 'rate_list.html', context=context)
+
+
+def source_data(request):
+    context = {
+        'rate_list': Source.objects.all(),
+    }
+    return render(request, 'source_data.html', context=context)

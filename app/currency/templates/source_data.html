@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Source URL</th>
+      </tr>
+      {% for rate in rate_list %}
+          <tr>
+            <th>{{rate.id}}</th>
+            <td>{{source.source_url}}</td>
+            <td>{{source.source_url}}</td>
+          </tr>
+      {% endfor %}
+    </table>
+
+{% endblock main_content %}
