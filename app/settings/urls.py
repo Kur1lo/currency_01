@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
-from currency.views import first_func, contact_base, rate_list, index, source_data, rate_create, rate_update, rate_details, rate_delete
+from currency.views import first_func, contact_base, rate_list, index, source_data, rate_create, rate_update,\
+    rate_details, rate_delete, source_create, source_update, source_delete
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -20,6 +21,12 @@ urlpatterns = [
     path('rate/delete/<int:rate_id>/', rate_delete),
 
     path('source/', source_data),
+
+    path('source/create/', source_create),
+
+    path('source/update/<int:rate_id>/', source_update),
+
+    path('source/delete/<int:rate_id>/', source_delete),
 
     path('', index),
 ]
