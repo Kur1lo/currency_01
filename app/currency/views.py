@@ -1,26 +1,65 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views import generic
 
-from currency.models import ContactUs, Rate
-
-
-def first_func(request):
-    return HttpResponse("Hello world")
+from currency.models import ContactUs, Rate, Source
+from currency.forms import RateForm, SourceForm
 
 
-def index(request):
-    return render(request, 'index.html')
+class ContactBaseView(generic.ListView):
+    queryset = ContactUs.objects.all()
+    template_name = 'contact_base.html'
 
 
-def contact_base(request):
-    context = {
-        'base_list': ContactUs.objects.all(),
-    }
-    return render(request, 'contact_base.html', context=context)
+class RateListView(generic.ListView):
+    queryset = Rate.objects.all()
+    template_name = 'rate_list.html'
 
 
-def rate_list(request):
-    context = {
-        'rate_list': Rate.objects.all(),
-    }
-    return render(request, 'rate_list.html', context=context)
+class RateCreateView(generic.CreateView):
+    queryset = Rate.objects.all()
+    template_name = 'for_create.html'
+    form_class = RateForm
+    success_url = reverse_lazy('currency:rate_list')
+
+
+class RateUpdateView(generic.UpdateView):
+    queryset = Rate.objects.all()
+    template_name = 'for_update.html'
+    form_class = RateForm
+    success_url = reverse_lazy('currency:rate_list')
+
+
+class RateDeleteView(generic.DeleteView):
+    queryset = Rate.objects.all()
+    template_name = 'for_delete.html'
+    success_url = reverse_lazy('currency:rate_list')
+
+
+class RateDetailsView(generic.DeleteView):
+    queryset = Rate.objects.all()
+    template_name = 'for_details.html'
+
+
+class SourceDataView(generic.ListView):
+    queryset = Source.objects.all()
+    template_name = 'source_data.html'
+
+
+class SourceCreateView(generic.CreateView):
+    queryset = Source.objects.all()
+    template_name = 'for_create.html'
+    form_class = SourceForm
+    success_url = reverse_lazy('currency:source')
+
+
+class SourceUpdateView(generic.UpdateView):
+    queryset = Source.objects.all()
+    template_name = 'for_update.html'
+    form_class = SourceForm
+    success_url = reverse_lazy('currency:source')
+
+
+class SourceDeleteView(generic.DeleteView):
+    queryset = Source.objects.all()
+    template_name = 'for_delete.html'
+    success_url = reverse_lazy('currency:source')

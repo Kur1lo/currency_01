@@ -4,6 +4,6 @@
     <div> What do you want check?</div>
 
     <div>
-        <a href="rate/">Rate List</a> or <a href="contact_base/">Contact Base</a>
+        <a href="{% url 'currency:rate_list' %}">Rate List</a> or <a href="{% url 'currency:contact_base' %}">Contact Base</a> or <a href="{% url 'currency:source' %}">Source</a>
     </div>
 {% endblock main_content %}
