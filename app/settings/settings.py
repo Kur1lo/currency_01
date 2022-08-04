@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'silk',
     'rangefilter',
+    'import_export',
 ]
 
 MIDDLEWARE = [

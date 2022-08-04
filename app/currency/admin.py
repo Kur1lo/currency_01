@@ -2,6 +2,7 @@ from django.contrib import admin
 from currency.models import Source, ContactUs, Rate
 
 from rangefilter.filters import DateTimeRangeFilter
+from import_export.admin import ImportExportModelAdmin
 
 
 @admin.register(Source)
@@ -36,7 +37,7 @@ class ContactUsAdmin(admin.ModelAdmin):
 
 
 @admin.register(Rate)
-class RateAdmin(admin.ModelAdmin):
+class RateAdmin(ImportExportModelAdmin):
     list_display = (
         'id',
         'base_currency_type',
