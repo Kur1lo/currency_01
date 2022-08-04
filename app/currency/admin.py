@@ -1,5 +1,7 @@
 from django.contrib import admin
-from currency.models import Source, ContactUs
+from currency.models import Source, ContactUs, Rate
+
+from rangefilter.filters import DateTimeRangeFilter
 
 
 @admin.register(Source)
@@ -32,3 +34,27 @@ class ContactUsAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
+
+@admin.register(Rate)
+class RateAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'base_currency_type',
+        'currency_type',
+        'sale',
+        'buy',
+    )
+    readonly_fields = (
+        'sale',
+        'buy',
+    )
+    search_fields = (
+        'base_currency_type',
+        'currency_type',
+        'sale',
+        'buy',
+    )
+    list_filter = (
+        'base_currency_type',
+        ('created', DateTimeRangeFilter),
+    )
