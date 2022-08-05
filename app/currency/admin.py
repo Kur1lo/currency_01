@@ -24,13 +24,11 @@ class ContactUsAdmin(admin.ModelAdmin):
         'massage',
     )
 
-    readonly_fields = (
-        'id',
-        'email_to',
-        'email_from',
-        'subject',
-        'massage',
-    )
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
 
     def has_delete_permission(self, request, obj=None):
         return False
