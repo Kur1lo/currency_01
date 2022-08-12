@@ -23,7 +23,7 @@ class Source(models.Model):
 
 
 class ResponseLog (models.Model):
-    response_time = models.DecimalField(max_digits=10, decimal_places=4)
+    response_time = models.CharField(max_length=64)
     request_method = models.CharField(max_length=64)
     query_params = models.CharField(max_length=64)
     ip = models.CharField(max_length=64)

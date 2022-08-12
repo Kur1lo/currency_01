@@ -9,16 +9,17 @@ class SimpleMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        start = float(time())
+        start = time()
 
         response = self.get_response(request)
 
-        end = float(time())
-        resp_time = end - start
-        print(f'Took Time: {resp_time}')
+        end = time()
+
+        def resp_time(start, end):
+            return str(end - start)
 
         req_method = request.method
-        quer_params = request.GET
+        quer_params = request.META["QUERY_STRING"]
         path = request.path
 
         def get_client_ip(request):
@@ -29,7 +30,7 @@ class SimpleMiddleware:
                 ip = request.META.get('REMOTE_ADDR')
             return ip
 
-        data = ResponseLog(response_time=resp_time,
+        data = ResponseLog(response_time=resp_time(start, end),
                            request_method=req_method,
                            query_params=quer_params,
                            ip=get_client_ip(request),
