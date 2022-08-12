@@ -69,13 +69,3 @@ class SourceDeleteView(generic.DeleteView):
 class ResponseLogView(generic.ListView):
     queryset = ResponseLog.objects.all()
     template_name = 'response_log.html'
-
-
-# ResponseLog.objects.create(response_time=" ", request_method=' ', query_params= "", ip = " ", path = " ")
-# class ResponseLogCreate(SimpleMiddleware):
-#     response_time = object.resp_time
-#     request_method = object.req_method
-#     query_params = object.quer_params
-#     # ip
-#     path = object.path
-#     ResponseLog.objects.create(response_time=" ", request_method=' ', query_params="", ip=" ", path=" ")
