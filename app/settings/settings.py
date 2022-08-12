@@ -43,6 +43,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'silk.middleware.SilkyMiddleware',
+    'currency.middelewares.SimpleMiddleware',
 ]
 
 ROOT_URLCONF = 'settings.urls'

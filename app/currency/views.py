@@ -1,8 +1,9 @@
 from django.urls import reverse_lazy
 from django.views import generic
 
-from currency.models import ContactUs, Rate, Source
+from currency.models import ContactUs, Rate, Source, ResponseLog
 from currency.forms import RateForm, SourceForm
+from currency.middelewares import SimpleMiddleware
 
 
 class ContactBaseView(generic.ListView):
@@ -63,3 +64,18 @@ class SourceDeleteView(generic.DeleteView):
     queryset = Source.objects.all()
     template_name = 'for_delete.html'
     success_url = reverse_lazy('currency:source')
+
+
+class ResponseLogView(generic.ListView):
+    queryset = ResponseLog.objects.all()
+    template_name = 'response_log.html'
+
+
+# ResponseLog.objects.create(response_time=" ", request_method=' ', query_params= "", ip = " ", path = " ")
+# class ResponseLogCreate(SimpleMiddleware):
+#     response_time = object.resp_time
+#     request_method = object.req_method
+#     query_params = object.quer_params
+#     # ip
+#     path = object.path
+#     ResponseLog.objects.create(response_time=" ", request_method=' ', query_params="", ip=" ", path=" ")

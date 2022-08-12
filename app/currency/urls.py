@@ -17,4 +17,6 @@ urlpatterns = [
     path('source/create/', views.SourceCreateView.as_view(), name='source_create'),
     path('source/update/<int:pk>/', views.SourceUpdateView.as_view(), name='source_update'),
     path('source/delete/<int:pk>/', views.SourceDeleteView.as_view(), name='source_delete'),
+
+    path('response_log/', views.ResponseLogView.as_view(), name='response_log')
 ]

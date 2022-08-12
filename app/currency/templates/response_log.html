@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Response_time</th>
+        <th>Request_method</th>
+        <th>Query_params</th>
+        <th>Ip</th>
+        <th>Path</th>
+      </tr>
+      {% for object in object_list %}
+          <tr>
+            <th>{{object.id}}</th>
+            <td>{{object.response_time}}</td>
+            <td>{{object.request_method}}</td>
+            <td>{{object.query_params}}</td>
+            <td>{{object.ip}}</td>
+            <td>{{object.path}}</td>
+
+          </tr>
+      {% endfor %}
+    </table>
+
+{% endblock main_content %}
