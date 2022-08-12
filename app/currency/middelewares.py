@@ -1,5 +1,4 @@
 from time import time
-import requests
 
 from currency.models import ResponseLog
 
