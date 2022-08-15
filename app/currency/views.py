@@ -1,7 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 from django.views import generic
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from currency.models import ContactUs, Rate, Source, ResponseLog
 from currency.forms import RateForm, SourceForm, ContactUsForm
@@ -96,3 +98,16 @@ class SourceDeleteView(generic.DeleteView):
 class ResponseLogView(generic.ListView):
     queryset = ResponseLog.objects.all()
     template_name = 'response_log.html'
+
+
+class UserProfileView(LoginRequiredMixin, generic.UpdateView):
+    queryset = get_user_model().objects.all()
+    template_name = 'my_profile.html'
+    success_url = '/'
+    fields = (
+        'first_name',
+        'last_name',
+    )
+
+    def get_object(self, queryset=None):
+        return self.request.user
