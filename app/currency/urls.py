@@ -12,9 +12,12 @@ urlpatterns = [
     path('rate/details/<int:pk>/', views.RateDetailsView.as_view(), name='rate_details'),
 
     path('contact_base/', views.ContactBaseView.as_view(), name='contact_base'),
+    path('contact_base/create/', views.ContactUsCreateView.as_view(), name='base_create'),
 
     path('source/', views.SourceDataView.as_view(), name='source'),
     path('source/create/', views.SourceCreateView.as_view(), name='source_create'),
     path('source/update/<int:pk>/', views.SourceUpdateView.as_view(), name='source_update'),
     path('source/delete/<int:pk>/', views.SourceDeleteView.as_view(), name='source_delete'),
+
+    path('response_log/', views.ResponseLogView.as_view(), name='response_log')
 ]
