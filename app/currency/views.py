@@ -9,6 +9,10 @@ from currency.models import ContactUs, Rate, Source, ResponseLog
 from currency.forms import RateForm, SourceForm, ContactUsForm
 
 
+class IndexView(generic.TemplateView):
+    template_name = 'index.html'
+
+
 class ContactBaseView(generic.ListView):
     queryset = ContactUs.objects.all()
     template_name = 'contact_base.html'
@@ -103,7 +107,7 @@ class ResponseLogView(generic.ListView):
 class UserProfileView(LoginRequiredMixin, generic.UpdateView):
     queryset = get_user_model().objects.all()
     template_name = 'my_profile.html'
-    success_url = '/'
+    success_url = reverse_lazy('index')
     fields = (
         'first_name',
         'last_name',

@@ -15,7 +15,7 @@
         <a href="{% url 'logout' %}">LogOut</a>
     {% else %}
         <a href="{% url 'login' %}">LogIn</a>
-        <a href="#">SingUp</a>
+        <a href="{% url 'accounts:sing_up' %}">SingUp</a>
     {% endif %}
 
 
