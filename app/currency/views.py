@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.core.mail import send_mail
 from django.conf import settings
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from currency.models import ContactUs, Rate, Source, ResponseLog
 from currency.forms import RateForm, SourceForm, ContactUsForm
@@ -63,10 +63,13 @@ class RateUpdateView(generic.UpdateView):
     success_url = reverse_lazy('currency:rate_list')
 
 
-class RateDeleteView(generic.DeleteView):
+class RateDeleteView(UserPassesTestMixin, generic.DeleteView):
     queryset = Rate.objects.all()
     template_name = 'for_delete.html'
     success_url = reverse_lazy('currency:rate_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 class RateDetailsView(generic.DeleteView):
