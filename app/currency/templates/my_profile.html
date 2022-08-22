@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title%} CREATE {% endblock title%}
+{% block title%} My Profile {% endblock title%}
 
 {% block main_content%}
 
-
-    Create
+    Create Profile
 
     <form method="post">
         {%csrf_token%}
         {{form.as_p}}
         <button type="submit">Send</button>
+        <a href= '{% url "accounts:password_change" %}'>Change Password</a>
     </form>
 {% endblock main_content %}

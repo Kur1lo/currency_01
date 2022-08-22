@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title%} CREATE {% endblock title%}
+{% block title%} SingUp {% endblock title%}
 
 {% block main_content%}
 
-
-    Create
+    SingUp
 
     <form method="post">
         {%csrf_token%}
         {{form.as_p}}
+        <button type="reset">Reset</button>
         <button type="submit">Send</button>
     </form>
 {% endblock main_content %}
