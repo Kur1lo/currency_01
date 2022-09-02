@@ -2,12 +2,12 @@ from django.contrib.auth import get_user_model
 from django import forms
 from django.urls import reverse_lazy
 from django.views import generic
-from django.core.mail import send_mail
-from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from currency.models import ContactUs, Rate, Source, ResponseLog
 from currency.forms import RateForm, SourceForm, ContactUsForm
+
+from currency.tasks import send_contact_us_email
 
 
 class IndexView(generic.TemplateView):
@@ -33,26 +33,9 @@ class ContactUsCreateView(generic.CreateView):
     def form_valid(self, form):
         response = super().form_valid(form)
 
-        self._send_contact_us_email()
+        send_contact_us_email.delay(self.object.subject, self.object.email_from)
 
         return response
-
-    def _send_contact_us_email(self):
-        subject = 'ContactUs From Currency Project'
-        body = f'''
-                Subject From Client: {self.object.subject}
-                Email: {self.object.email_from}
-                Test massage!
-                '''
-        from time import sleep
-        sleep(10)
-        send_mail(
-            subject,
-            body,
-            settings.EMAIL_HOST_USER,
-            [settings.EMAIL_HOST_USER],
-            fail_silently=False,
-        )
 
 
 class RateListView(generic.ListView):
