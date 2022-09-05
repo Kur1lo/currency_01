@@ -1,6 +1,7 @@
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from celery.schedules import crontab
 from django.urls import reverse_lazy
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -141,3 +142,30 @@ HTTP_SCHEMA = 'http'
 DOMAIN = 'localhost:8000'
 
 CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_BEAT_SCHEDULE = {
+    'parse_privatbank': {
+        'task': 'currency.tasks.parse_privatbank',
+        'schedule': crontab(minute='*/1'),
+
+    },
+    'parse_monobank': {
+        'task': 'currency.tasks.parse_monobank',
+        'schedule': crontab(minute='*/1'),
+
+    },
+    'parse_nbu': {
+        'task': 'currency.tasks.parse_nbu',
+        'schedule': crontab(minute='*/1'),
+
+    },
+    'parse_oshad_bank': {
+        'task': 'currency.tasks.parse_oshad_bank',
+        'schedule': crontab(minute='*/1'),
+
+    },
+    'parse_pumb': {
+        'task': 'currency.tasks.parse_pumb',
+        'schedule': crontab(minute='*/1'),
+
+    },
+}
