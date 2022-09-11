@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
-    <div><a href="{% url 'currency:base_create' %}">Create new massage</a></div>
+    <div>
+        <a class="btn btn-primary"
+   role="button"
+   href="{% url 'currency:base_create' %}">Create new massage</a>
+
     <table>
       <tr>
         <th>Id</th>

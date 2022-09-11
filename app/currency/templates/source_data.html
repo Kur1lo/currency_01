@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
+
 <div><a href="{% url 'currency:source_create' %}">Create new </a></div>
     <table>
       <tr>
         <th>#</th>
         <th>Name</th>
         <th>Source URL</th>
+        <th>Logo</th>
       </tr>
       {% for source in source_list %}
           <tr>
             <th>{{source.id}}</th>
             <td>{{source.name}}</td>
             <td>{{source.source_url}}</td>
+            <td><img src="{{ source.logo.url }}" height="30" width="30"></td>
             <td>
                 <a href="{% url 'currency:source_update' source.id %}"> update </a>
                 <a href="{% url 'currency:source_delete' source.id %}"> delete </a>

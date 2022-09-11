@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-
-{% block title%} UPDATE {% endblock title%}
+{% load crispy_forms_tags %}
 
 {% block main_content%}
-
-    Update
+    Create
 
     <form method="post">
         {%csrf_token%}
-        {{form.as_p}}
+        {{form.source_url|as_crispy_field}}
+        {{form.name|as_crispy_field}}
+        {{form.logo|as_crispy_field}}
+
         <button type="submit">Send</button>
-        <button type="reset">Reset</button>
     </form>
 {% endblock main_content %}

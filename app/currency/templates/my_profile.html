@@ -4,12 +4,14 @@
 
 {% block main_content%}
 
-    Create Profile
+{% if request.user.avatar %}
+    <img src="{{ request.user.avatar.url }}" height="100" width="100">
+{% endif %}
 
-    <form method="post">
-        {%csrf_token%}
-        {{form.as_p}}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="reset">Reset</button>
         <button type="submit">Send</button>
-        <a href= '{% url "accounts:password_change" %}'>Change Password</a>
     </form>
 {% endblock main_content %}

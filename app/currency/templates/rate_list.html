@@ -1,33 +1,44 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block main_content %}
-  <div><a href="{% url 'currency:rate_create' %}">Create new rate</a></div>
 
-    <table>
+<a class="btn btn-primary"
+   role="button"
+   href="{% url 'currency:rate_create' %}">Create new rate</a>
+
+
+<div class="container mt-3">
+    <h2>Rates List</h2>
+<table class="table table-dark table-hover">
+    <tr>
+      <th>ID</th>
+      <th>Sale</th>
+      <th>Buy</th>
+      <th>Base Type</th>
+      <th>Type</th>
+      <th>Source</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for rate in rate_list %}
       <tr>
-        <th>Id</th>
-        <th>Base_currency_type</th>
-        <th>Currency_type</th>
-        <th>Sale</th>
-        <th>Buy</th>
-        <th>Source</th>
-        <th>Created</th>
+          <td>{{ rate.id }}</td>
+          <td>{{ rate.sale }}</td>
+          <td>{{ rate.buy }}</td>
+          <td>{{ rate.get_base_currency_type_display }}</td>
+          <td>{{ rate.get_currency_type_display }}</td>
+          <td>{{ rate.source.name }}<img src="{{ rate.source.logo.url }}" height="25" width="25"></td>
+          <td>
+              <a href="{% url 'currency:rate_details' rate.id %}">view details</a>
+              <a href="{% url 'currency:rate_update' pk=rate.id %}">edit</a>
+              <a href="{% url 'currency:rate_delete' rate.id %}">delete</a>
+          </td>
       </tr>
-      {% for rate in rate_list %}
-          <tr>
-            <th>{{rate.id}}</th>
-            <td>{{rate.base_currency_type}}</td>
-            <td>{{rate.currency_type}}</td>
-            <td>{{rate.sale}}</td>
-            <td>{{rate.buy}}</td>
-            <td>{{rate.source.name}}</td>
-            <td>{{rate.created}}</td>
-            <td><a href="{% url 'currency:rate_details' rate.id %}"> view details </a>
-              <a href="{% url 'currency:rate_update' rate.id %}"> edit </a>
-              <a href="{% url 'currency:rate_delete' rate.id %}"> delete </a>
-            </td>
-          </tr>
-      {% endfor %}
-    </table>
-
+    {% endfor %}
+    </tbody>
+</table>
+</div>
 {% endblock main_content %}

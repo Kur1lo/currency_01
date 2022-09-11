@@ -218,7 +218,7 @@ def parse_oshad_bank():
     eur = [pars_set[7], pars_set[9], pars_set[10]]
     redy_set = [usd, eur]
     source = Source.objects.get_or_create(
-        name=consts.CODE_NAME_OSHAD_BANK ,
+        name=consts.CODE_NAME_OSHAD_BANK,
         defaults={'source_url': url, 'name': 'OshadBank'},
     )[0]
 

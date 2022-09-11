@@ -21,7 +21,7 @@ class ContactBaseView(generic.ListView):
 
 class ContactUsCreateView(generic.CreateView):
     queryset = ContactUs.objects.all()
-    template_name = 'for_create.html'
+    template_name = 'create_new_massage.html'
     form_class = ContactUsForm
     success_url = reverse_lazy('currency:contact_base')
 
@@ -45,14 +45,14 @@ class RateListView(generic.ListView):
 
 class RateCreateView(generic.CreateView):
     queryset = Rate.objects.all()
-    template_name = 'for_create.html'
+    template_name = 'rate_create-update.html'
     form_class = RateForm
     success_url = reverse_lazy('currency:rate_list')
 
 
 class RateUpdateView(generic.UpdateView):
     queryset = Rate.objects.all()
-    template_name = 'for_update.html'
+    template_name = 'rate_create-update.html'
     form_class = RateForm
     success_url = reverse_lazy('currency:rate_list')
 
@@ -78,14 +78,14 @@ class SourceDataView(generic.ListView):
 
 class SourceCreateView(generic.CreateView):
     queryset = Source.objects.all()
-    template_name = 'for_create.html'
+    template_name = 'source_create-update.html'
     form_class = SourceForm
     success_url = reverse_lazy('currency:source')
 
 
 class SourceUpdateView(generic.UpdateView):
     queryset = Source.objects.all()
-    template_name = 'for_update.html'
+    template_name = 'source_create-update.html'
     form_class = SourceForm
     success_url = reverse_lazy('currency:source')
 
@@ -108,6 +108,7 @@ class UserProfileView(LoginRequiredMixin, generic.UpdateView):
     fields = (
         'first_name',
         'last_name',
+        'avatar',
     )
 
     def get_object(self, queryset=None):
