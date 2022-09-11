@@ -1,13 +1,10 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
 {% block main_content %}
-
 <a class="btn btn-primary"
    role="button"
    href="{% url 'currency:rate_create' %}">Create new rate</a>
-
 
 <div class="container mt-3">
     <h2>Rates List</h2>
