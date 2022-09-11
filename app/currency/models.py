@@ -8,18 +8,19 @@ class ContactUs(models.Model):
     massage = models.CharField(max_length=500)
 
 
+class Source(models.Model):
+    source_url = models.CharField(max_length=255)
+    name = models.CharField(max_length=64)
+    logo = models.FileField(default='av.png')
+
+
 class Rate(models.Model):
     base_currency_type = models.CharField(max_length=3)
     currency_type = models.CharField(max_length=3)
     sale = models.DecimalField(max_digits=10, decimal_places=4)
     buy = models.DecimalField(max_digits=10, decimal_places=4)
-    source = models.CharField(max_length=64)
+    source = models.ForeignKey('currency.Source', on_delete=models.CASCADE, related_name='rates')
     created = models.DateTimeField(auto_now_add=True)
-
-
-class Source(models.Model):
-    source_url = models.CharField(max_length=255)
-    name = models.CharField(max_length=64)
 
 
 class ResponseLog (models.Model):

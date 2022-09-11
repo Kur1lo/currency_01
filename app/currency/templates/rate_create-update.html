@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block main_content%}
+
+    <form method="post">
+        {%csrf_token%}
+        {{form.base_currency_type|as_crispy_field}}
+        {{form.currency_type|as_crispy_field}}
+        {{form.sale|as_crispy_field}}
+        {{form.buy|as_crispy_field}}
+        {{form.source|as_crispy_field}}
+        <button type="submit">Send</button>
+    </form>
+{% endblock main_content %}

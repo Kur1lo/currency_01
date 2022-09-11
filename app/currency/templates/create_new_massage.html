@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block title%} CREATE {% endblock title%}
 
 {% block main_content%}
 
-
-    Create
-
     <form method="post">
         {%csrf_token%}
-        {{form.as_p}}
+        {{form.email_to|as_crispy_field}}
+        {{form.email_from|as_crispy_field}}
+        {{form.subject|as_crispy_field}}
+        {{form.massage|as_crispy_field}}
+
         <button type="submit">Send</button>
     </form>
 {% endblock main_content %}
