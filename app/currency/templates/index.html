@@ -5,9 +5,22 @@
     <div> What do you want check?</div>
 
     <div>
-        <a href="{% url 'currency:rate_list' %}">Rate List</a>
-        | <a href="{% url 'currency:source' %}">Source</a>
-        | <a href="{% url 'currency:contact_base' %}">Contact Base</a>
-        | <a href="{% url 'currency:response_log' %}">Response log</a>
+
+        <a class="btn btn-primary"
+        role="button"
+        href="{% url 'currency:rate_list' %}">Rate List</a>
+
+        <a class="btn btn-primary"
+        role="button"
+        href="{% url 'currency:source' %}">Source</a>
+
+        <a class="btn btn-primary"
+        role="button"
+        href="{% url 'currency:contact_base' %}">Contact Base</a>
+
+        <a class="btn btn-primary"
+        role="button"
+        href="{% url 'currency:response_log' %}">Response log</a>
+
     </div>
 {% endblock main_content %}

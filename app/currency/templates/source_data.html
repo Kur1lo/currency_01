@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 
 {% block main_content %}
+<a class="btn btn-primary"
+   role="button"
+   href="{% url 'currency:source_create' %}">Create new rate</a>
+<div class="container mt-3">
+        <h2>Rates List</h2>
+    <table class="table table-dark table-hover">
 
-<div><a href="{% url 'currency:source_create' %}">Create new </a></div>
-    <table>
       <tr>
         <th>#</th>
         <th>Name</th>
         <th>Source URL</th>
         <th>Logo</th>
+        <th>Options</th>
       </tr>
       {% for source in source_list %}
           <tr>

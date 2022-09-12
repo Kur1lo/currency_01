@@ -2,28 +2,32 @@
 
 {% block main_content %}
     <div>
-        <a class="btn btn-primary"
-   role="button"
-   href="{% url 'currency:base_create' %}">Create new massage</a>
+       <a class="btn btn-primary"
+       role="button"
+       href="{% url 'currency:base_create' %}">Create new massage</a>
+    </div>
 
-    <table>
-      <tr>
-        <th>Id</th>
-        <th>Email_to</th>
-        <th>Email_from</th>
-        <th>Subject</th>
-        <th>Massage</th>
-      </tr>
-
-      {% for data in object_list %}
-          <tr>
-            <th>{{data.id}}</th>
-            <td>{{data.email_to}}</td>
-            <td>{{data.email_from}}</td>
-            <td>{{data.subject}}</td>
-            <td>{{data.massage}}</td>
-          </tr>
-      {% endfor %}
+    <table class="table table-striped">
+        <thead >
+              <tr>
+                <th>Id</th>
+                <th>Email_to</th>
+                <th>Email_from</th>
+                <th>Subject</th>
+                <th>Massage</th>
+              </tr>
+        </thead>
+        <tbody>
+          {% for data in object_list %}
+              <tr>
+                <th>{{data.id}}</th>
+                <td>{{data.email_to}}</td>
+                <td>{{data.email_from}}</td>
+                <td>{{data.subject}}</td>
+                <td>{{data.massage}}</td>
+               </tr>
+          {% endfor %}
+        </tbody>
     </table>
 
 {% endblock main_content %}
