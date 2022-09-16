@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'silk',
     'rangefilter',
     'import_export',
+    'django_filters',
 
     'crispy_forms',
     'crispy_bootstrap5',
