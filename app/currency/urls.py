@@ -21,5 +21,6 @@ urlpatterns = [
 
     path('response_log/', views.ResponseLogView.as_view(), name='response_log'),
 
-    path('my_profile/<int:pk>', views.UserProfileView.as_view(), name='my_profile')
+    path('my_profile/<int:pk>', views.UserProfileView.as_view(), name='my_profile'),
+
 ]

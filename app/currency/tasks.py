@@ -156,9 +156,9 @@ def parse_nbu():
     response_data = response.json()
 
     currency_type_mapper = {
-        980: mch.CurrencyType.CURRENCY_TYPE_UAH,
-        840: mch.CurrencyType.CURRENCY_TYPE_USD,
-        978: mch.CurrencyType.CURRENCY_TYPE_EUR,
+        980: 'UAH',
+        840: 'USD',
+        978: 'EUR',
     }
 
     source = Source.objects.get_or_create(
@@ -167,39 +167,37 @@ def parse_nbu():
     )[0]
 
     for rate_data in response_data:
-        if rate_data['r030'] in currency_type_mapper.keys():
-            currency_type = rate_data['r030']
-            base_currency_type = currency_type_mapper[980]
 
-            if currency_type not in currency_type_mapper or \
-                    base_currency_type not in currency_type_mapper:
-                continue
+        currency_type = rate_data['r030']
 
+        if currency_type not in currency_type_mapper:
+            continue
+        else:
             currency_type = currency_type_mapper[rate_data['r030']]
-            base_currency_type = currency_type_mapper[980]
+        base_currency_type = currency_type_mapper[980]
 
-            buy = to_decimal(rate_data['rate'])
-            sale = to_decimal(rate_data['rate'])
+        buy = to_decimal(rate_data['rate'])
+        sale = to_decimal(rate_data['rate'])
 
-            try:
-                latest_rate = Rate.objects.filter(
-                    base_currency_type=base_currency_type,
-                    currency_type=currency_type,
-                    source=source,
-                ).latest('created')
-            except Rate.DoesNotExist:
-                latest_rate = None
+        try:
+            latest_rate = Rate.objects.filter(
+                base_currency_type=base_currency_type,
+                currency_type=currency_type,
+                source=source,
+            ).latest('created')
+        except Rate.DoesNotExist:
+            latest_rate = None
 
-            if latest_rate is None or \
-                    latest_rate.sale != sale or \
-                    latest_rate.buy != buy:
-                Rate.objects.create(
-                    base_currency_type=base_currency_type,
-                    currency_type=currency_type,
-                    buy=buy,
-                    sale=sale,
-                    source=source,
-                )
+        if latest_rate is None or \
+                latest_rate.sale != sale or \
+                latest_rate.buy != buy:
+            Rate.objects.create(
+                base_currency_type=base_currency_type,
+                currency_type=currency_type,
+                buy=buy,
+                sale=sale,
+                source=source,
+            )
 
 
 @shared_task
@@ -273,6 +271,65 @@ def parse_pumb():
         base_currency_type = "UAH"
         buy = to_decimal(rate_data[2])
         sale = to_decimal(rate_data[1])
+
+        try:
+            latest_rate = Rate.objects.filter(
+                base_currency_type=base_currency_type,
+                currency_type=currency_type,
+                source=source,
+            ).latest('created')
+        except Rate.DoesNotExist:
+            latest_rate = None
+
+        if latest_rate is None or \
+                latest_rate.sale != sale or \
+                latest_rate.buy != buy:
+            Rate.objects.create(
+                base_currency_type=base_currency_type,
+                currency_type=currency_type,
+                buy=buy,
+                sale=sale,
+                source=source,
+            )
+
+
+@shared_task
+def parse_vkurse():
+    from currency.models import Rate, Source
+
+    url = 'http://vkurse.dp.ua/course.json'
+
+    response = requests.get(url)
+    response.raise_for_status()
+    response_data = response.json()
+
+    currency_type_mapper = {
+        'UAH': mch.CurrencyType.CURRENCY_TYPE_UAH,
+        'Dollar': mch.CurrencyType.CURRENCY_TYPE_USD,
+        'Euro': mch.CurrencyType.CURRENCY_TYPE_EUR,
+
+
+    }
+
+    source = Source.objects.get_or_create(
+        name=consts.CODE_NAME_VKURSE,
+        defaults={'source_url': url, 'name': 'VkurseDp'},
+    )[0]
+
+    for rate_data in response_data:
+        currency_type = rate_data
+        base_currency_type = 'UAH'
+
+        if currency_type not in currency_type_mapper or \
+                base_currency_type not in currency_type_mapper:
+            continue
+
+        currency_type = currency_type_mapper[rate_data]
+        base_currency_type = 'UAH'
+
+        buy = to_decimal(response_data[rate_data]['buy'])
+
+        sale = to_decimal(response_data[rate_data]['sale'])
 
         try:
             latest_rate = Rate.objects.filter(
