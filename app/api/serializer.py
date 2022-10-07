@@ -43,4 +43,5 @@ class ContactUsSerializer(ModelSerializer):
         )
 
     def create(self, validated_data):
-        return send_contact_us_email.delay(self.data['subject'], self.data['email_from'])
+        send_contact_us_email.delay(self.data['subject'], self.data['email_from'])
+        return ContactUs.objects.create(**validated_data)
