@@ -46,7 +46,7 @@ class ContactsViews(generics.ListCreateAPIView):
     serializer_class = ContactUsSerializer
     pagination_class = ContactUsPagination
     filterset_class = ContactUsFilter
-    filter_backends = [rest_framework_filters.SearchFilter]
+    filter_backends = [filters.DjangoFilterBackend]
     search_fields = ['email_to', 'email_from', 'subject', 'massage']
 
 

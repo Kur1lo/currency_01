@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from currency.models import Rate, Source, ContactUs
-# from currency.tasks import send_contact_us_email
+from currency.tasks import send_contact_us_email
 
 
 class RateSerializer(ModelSerializer):
@@ -42,9 +42,6 @@ class ContactUsSerializer(ModelSerializer):
 
         )
 
-    # def create(self, validated_data):
-    #     return send_contact_us_email.delay(self.subject, self.email_from)
-
-    # def create(self, validated_data):
-    #     send_contact_us_email.delay(self.subject, self.email_from)
-    #     return Comment(**validated_data)
+    def create(self, validated_data):
+        send_contact_us_email.delay(self.data['subject'], self.data['email_from'])
+        return ContactUs.objects.create(**validated_data)
