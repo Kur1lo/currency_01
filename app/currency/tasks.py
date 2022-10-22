@@ -307,7 +307,7 @@ def parse_vkurse():
         'UAH': mch.CurrencyType.CURRENCY_TYPE_UAH,
         'Dollar': mch.CurrencyType.CURRENCY_TYPE_USD,
         'Euro': mch.CurrencyType.CURRENCY_TYPE_EUR,
-
+        'Pln': "pln",
 
     }
 
@@ -315,9 +315,9 @@ def parse_vkurse():
         name=consts.CODE_NAME_VKURSE,
         defaults={'source_url': url, 'name': 'VkurseDp'},
     )[0]
-
+    # breakpoint()
     for rate_data in response_data:
-        currency_type = rate_data
+        currency_type = currency_type_mapper[rate_data]
         base_currency_type = 'UAH'
 
         if currency_type not in currency_type_mapper or \
@@ -330,7 +330,6 @@ def parse_vkurse():
         buy = to_decimal(response_data[rate_data]['buy'])
 
         sale = to_decimal(response_data[rate_data]['sale'])
-
         try:
             latest_rate = Rate.objects.filter(
                 base_currency_type=base_currency_type,
