@@ -315,12 +315,11 @@ def parse_vkurse():
         name=consts.CODE_NAME_VKURSE,
         defaults={'source_url': url, 'name': 'VkurseDp'},
     )[0]
-    # breakpoint()
     for rate_data in response_data:
-        currency_type = currency_type_mapper[rate_data]
+
         base_currency_type = 'UAH'
 
-        if currency_type not in currency_type_mapper or \
+        if rate_data not in currency_type_mapper or \
                 base_currency_type not in currency_type_mapper:
             continue
 
