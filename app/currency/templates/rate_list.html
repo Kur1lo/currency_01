@@ -32,6 +32,7 @@
               <th>Base Type</th>
               <th>Type</th>
               <th>Source</th>
+              <th>Created</th>
               <th>Actions</th>
             </tr>
         </thead>
@@ -44,6 +45,7 @@
               <td>{{ rate.base_currency_type }}</td>
               <td>{{ rate.currency_type }}</td>
               <td>{{ rate.source.name }}<img src="{{ rate.source.logo.url }}" height="25" width="25"></td>
+              <td>{{ rate.created }}</td>
               <td>
                   <a href="{% url 'currency:rate_details' rate.id %}">view details</a>
                   <a href="{% url 'currency:rate_update' pk=rate.id %}">edit</a>
