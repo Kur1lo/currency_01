@@ -45,7 +45,7 @@ class RateListView(FilterView):
     template_name = 'rate_list.html'
     paginate_by = 10
     filterset_class = RateFilter
-    page_size_options = ['4', '8', '12', '24', '36']
+    page_size_options = ['4', '8', '12', '24', '36', '100']
 
     def get_context_data(self, *args, **kwargs):
         context: dict = super().get_context_data(*args, **kwargs)
