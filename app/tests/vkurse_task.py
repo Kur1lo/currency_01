@@ -5,7 +5,6 @@ from currency.tasks import parse_vkurse
 
 
 def test_parse_vkurse(mocker):
-
     response_json = {
         "Dollar": {"buy": "1.80", "sale": "41.20"},
         "Euro": {"buy": "8.90", "sale": "39.20"}

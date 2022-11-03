@@ -25,7 +25,7 @@ def parse_url(day=DATE[0], month=DATE[1], year=DATE[2]):
 
         response = requests.get(url)
         response_data = response.json()
-        if len(response_data['exchangeRate']) == 0:
+        if not response_data['exchangeRate']:
             count += 1
             continue
         else:
@@ -67,9 +67,7 @@ def write_to_db(response_data, url):
         except Rate.DoesNotExist:
             latest_rate = None
 
-        if latest_rate is None or \
-                latest_rate.sale != sale or \
-                latest_rate.buy != buy:
+        if latest_rate is None:
             Rate.objects.create(
                 base_currency_type=base_currency_type,
                 currency_type=currency_type,
