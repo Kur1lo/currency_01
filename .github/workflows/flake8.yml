@@ -21,4 +21,4 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         
-        flake8 app/
+        flake8 --ignore=F401,F403,F841,E121,E123,E126 app/
