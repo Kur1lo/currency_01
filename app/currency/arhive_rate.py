@@ -5,13 +5,9 @@ from currency.models import Rate, Source
 from currency import consts
 
 import requests
-from datetime import datetime
 
 
-DATE = f"{datetime.now():%d.%m.%Y}".split('.')
-
-
-def parse_url(day=DATE[0], month=DATE[1], year=DATE[2]):
+def parse_url(day, month, year):
     count = 0
     date_parse = []
 
